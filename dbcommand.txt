@@ -1,0 +1,47 @@
+DB(questionnaire)
+TABLE(ans)アンケート質問を入れる
+[id]			- 主キー,int(16)
+[qText]		- 問題文,vachar(128)
+[qType]		- 問題タイプ,varchar(32)
+[qChoice]	- 問題文の選択肢,varchar(256) {'radio' or 'textarea'}
+
+DROP DATABASE questionnaire;
+
+CREATE DATABASE questionnaire CHARACTER SET utf8;
+USE questionnaire;
+CREATE TABLE qes (
+	id int(16) NOT NULL AUTO_INCREMENT,
+	qText varchar(128) NOT NULL,
+	qType varchar(32) NOT NULL,
+	qChoice varchar(256) DEFAULT NULL,
+	PRIMARY KEY (id)
+);
+INSERT INTO `qes`(`qText`, `qType`, `qChoice`) VALUES('Linuxの基本的な操作(ファイルの確認,編集,移動等)', 'radio' , 'CUIで使える,GUIで使える,使えない');
+INSERT INTO `qes`(`qText`, `qType`, `qChoice`) VALUES('サーバを建てたことがある。', 'radio' , 'ある,ない');
+INSERT INTO `qes`(`qText`, `qType`, `qChoice`) VALUES('HTML、CSSの基本', 'radio' , '書くことができる,読めるむことができる,さっぱりわからない');
+INSERT INTO `qes`(`qText`, `qType`, `qChoice`) VALUES('JavaScriptの基本', 'radio' , '書くことができる,読めるむことができる,さっぱりわからない');
+INSERT INTO `qes`(`qText`, `qType`, `qChoice`) VALUES('PHPの基本', 'radio' , '書くことができる,読めるむことができる,さっぱりわからない');
+INSERT INTO `qes`(`qText`, `qType`, `qChoice`) VALUES('今まで脆弱性を見つけたことはありますか？', 'radio' , 'ある,ない');
+INSERT INTO `qes`(`qText`, `qType`, `qChoice`) VALUES('ぶっちゃけ、web系楽しくない', 'radio' , 'それな！,いいえ、楽しいです');
+INSERT INTO `qes`(`qText`, `qType`) VALUES('Hardeningまでの勉強会でして欲しいことはありますか？(64文字まで)', 'textarea');
+INSERT INTO `qes`(`qText`, `qType`) VALUES('このWebページについてどう思いますか？(64文字まで)', 'textarea');
+
+
+アンケートしたい内容
+*	Linuxの基本的な操作(ファイルの確認,編集,移動等)
+	1,CUIで使える 2,GUIで使える 3,使えない
+*	サーバを建てたことがある。
+	1,ある 2,ない
+*	HTML,CSSの基本
+	1,書くことができる 2,読めるむことができる 3,さっぱりわからない
+*	JavaScriptの基本
+	1,書くことができる 2,読めるむことができる 3,さっぱりわからない
+*	PHPの基本
+	1,書くことができる 2,読めるむことができる 3,さっぱりわからない
+*	今まで脆弱性を見つけたことはありますか？
+	1,ある 2,ない
+*	ぶっちゃけ、web系楽しくない
+	1,それな！ 2,いいえ、楽しいです
+*	Hardeningまでの勉強会でして欲しいことはありますか？あれば書いてください。(64文字まで)
+*	このWebページについてどう思いますか？(64文字まで)
+	--
