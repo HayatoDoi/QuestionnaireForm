@@ -1,5 +1,5 @@
 DB(questionnaire)
-TABLE(ans)アンケート質問を入れる
+TABLE(qes)アンケート質問を入れる
 [id]			- 主キー,int(16)
 [qText]		- 問題文,vachar(128)
 [qType]		- 問題タイプ,varchar(32)
@@ -26,8 +26,21 @@ INSERT INTO `qes`(`qText`, `qType`, `qChoice`) VALUES('ぶっちゃけ、web系�
 INSERT INTO `qes`(`qText`, `qType`) VALUES('Hardeningまでの勉強会でして欲しいことはありますか？(64文字まで)', 'textarea');
 INSERT INTO `qes`(`qText`, `qType`) VALUES('このWebページについてどう思いますか？(64文字まで)', 'textarea');
 
+TABLE(ans)アンケートの回答を入れる
+[id] -主キー ,int(16)
+[ansid] - 問題id , int(16)
+[aText] - 回答 , varchar(64)
 
-アンケートしたい内容
+CREATE TABLE ans (
+	id int(16) NOT NULL AUTO_INCREMENT,
+	ansid int(16) NOT NULL,
+	aText varchar(64) NOT NULL,
+	PRIMARY KEY (id)
+);
+== データベースの結合 == 
+SELECT qes.qText,ans.aText FROM ans INNER JOIN qes ON ans.ansid = qes.id;
+
+	アンケートしたい内容
 *	Linuxの基本的な操作(ファイルの確認,編集,移動等)
 	1,CUIで使える 2,GUIで使える 3,使えない
 *	サーバを建てたことがある。
