@@ -1,10 +1,12 @@
-<!--* File name : qform.php
-    * Author : Hayato Doi
-    * Outline : アンケートフォームのテンプレート(質問部分のみ後で入れる。)
-    * License : These codes are licensed under CC0.
-    *           http://creativecommons.org/publicdomain/zero/1.0/deed.ja
-    * Copyright (c) 2016, Hayato Doi
--->
+<?php
+/* File name : qform.php
+ * Author : Hayato Doi
+ * Outline : アンケートフォームのテンプレート(質問部分のみ後で入れる。)
+ * License : These codes are licensed under CC0.
+ *           http://creativecommons.org/publicdomain/zero/1.0/deed.ja
+ * Copyright (c) 2016, Hayato Doi
+ */
+?>
 <!DOCTYPE html >
 <html lang="ja">
 

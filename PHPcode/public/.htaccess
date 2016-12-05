@@ -31,6 +31,10 @@
 	#RewriteCond %{THE_REQUEST}				^[^/]*/index\.php [NC]
 	#RewriteRule ^index\.php(.*)$			$1 [R=301,NS,L]
 
+	RewriteCond %{HTTP:X-Requested-With}	!^XMLHttpRequest$
+	RewriteCond %{THE_REQUEST}				^[^/]*/index\.php [NC]
+	RewriteRule ^index\.php(.*)$			$1 [R=301,NS,L]
+
     # make HTTP Basic Authentication work on php-fcgi installs
     <IfModule mod_fcgid.c>
         RewriteCond %{HTTP:Authorization} .

@@ -34,7 +34,6 @@ class Controller_Questionnaire extends Controller
 			return Response::forge(View::forge('questionnaire/qform',array("questio" => $questions,),false));
 		}
 		else{
-			$data = array("body" => "登録が完了しました。");
 			$postdata = Input::post();
 			$body = "";
 			// var_dump($postdata);
@@ -43,25 +42,27 @@ class Controller_Questionnaire extends Controller
 			//var_dump($query);
 			$count = count($query); //for文の外で宣言すると早くなるらしい。
 			//データベースに登録
-			for ( $i = 0; $i < $count; $i++ ){
-				// echo $query[$i]["qText"].":::";
-				// echo $postdata["qes_".$query[$i]["id"]].":::";
-				// echo $query[$i]["id"];
-				$body .= View::forge("questionnaire/ansresult",array(
-					"labelid" => "qes_".$query[$i]["id"],
-					"qflabel" => $query[$i]["qText"],
-					"ddd" => $postdata["qes_".$query[$i]["id"]],
-				),false);
+			try {
+				for ( $i = 0; $i < $count; $i++ ){
+					// echo $query[$i]["qText"].":::";
+					// echo $postdata["qes_".$query[$i]["id"]].":::";
+					// echo $query[$i]["id"];
+					$body .= View::forge("questionnaire/ansresult",array(
+						"labelid" => "qes_".$query[$i]["id"],
+						"qflabel" => $query[$i]["qText"],
+						"ddd" => $postdata["qes_".$query[$i]["id"]],
+					),false);
 
-				$result = DB::insert("ans")->set(array(
-					"ansid" => $query[$i]["id"],
-					"aText" => $postdata["qes_".$query[$i]["id"]],
-				))->execute();
-				if($result[1] <= 0){
-					// $data["body"] = "失敗したのん！！";
-					echo "失敗しました";
+					$result = DB::insert("ans")->set(array(
+						"ansid" => $query[$i]["id"],
+						"aText" => $postdata["qes_".$query[$i]["id"]],
+					))->execute();
 				}
+			} catch (Exception $e) {
+				echo("mysql erorr");
+				return false;
 			}
+
 			return Response::forge(View::forge('questionnaire/postend.php',array("questio" => $body,),false));
 		}
 	}
