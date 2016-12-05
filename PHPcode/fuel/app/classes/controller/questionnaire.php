@@ -36,6 +36,7 @@ class Controller_Questionnaire extends Controller
 		else{
 			$data = array("body" => "登録が完了しました。");
 			$postdata = Input::post();
+			$body = "";
 			// var_dump($postdata);
 			//データベースに接続して、配列に代入
 			$query = DB::select()->from("qes")->execute()->as_array();
@@ -46,7 +47,12 @@ class Controller_Questionnaire extends Controller
 				// echo $query[$i]["qText"].":::";
 				// echo $postdata["qes_".$query[$i]["id"]].":::";
 				// echo $query[$i]["id"];
-				// echo "\n";
+				$body .= View::forge("questionnaire/ansresult",array(
+					"labelid" => "qes_".$query[$i]["id"],
+					"qflabel" => $query[$i]["qText"],
+					"ddd" => $postdata["qes_".$query[$i]["id"]],
+				),false);
+
 				$result = DB::insert("ans")->set(array(
 					"ansid" => $query[$i]["id"],
 					"aText" => $postdata["qes_".$query[$i]["id"]],
@@ -56,7 +62,7 @@ class Controller_Questionnaire extends Controller
 					echo "失敗しました";
 				}
 			}
-			return Response::forge(View::forge('questionnaire/500.php',$data));
+			return Response::forge(View::forge('questionnaire/postend.php',array("questio" => $body,),false));
 		}
 	}
 
