@@ -88,4 +88,8 @@ class Controller_Questionnaire extends Controller
 	{
 		echo "404 Not found.";
 	}
+	public function action_defaultpage()
+	{
+		return Response::forge(View::forge('questionnaire/index'));
+	}
 }
